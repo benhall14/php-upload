@@ -1,7 +1,9 @@
 # PHP Upload
-A PHP class that makes handling uploads simpler. --------------------------------------------------------------
+A PHP class that makes handling uploads and file validation simpler. You can use the chainable methods to setup the upload parameters such as min/max file size, mime types, and file extensions. Once setup, you simple turn on the ***ignition().*** 
 
-Tested to work with *PHP 5.6 and **PHP 7.***
+For a more advanced upload option, this class allows you to add callbacks and loop through the files awaiting upload to perform your own validation and checks.
+
+Tested to work with *PHP 5.6 and **PHP 7.***. Try it - It's FREE!
 
 # Installation with composer
 You can now install the upload class with composer
