@@ -1,16 +1,16 @@
 # PHP Upload
-A PHP class that makes handling uploads and file validation simpler. You can use the chainable methods to setup the upload parameters such as min/max file size, mime types, and file extensions. Once setup, you simple turn on the ***ignition().*** 
+A PHP class that makes handling uploads and file validation a lot simpler. You can use the chainable methods to set up the upload parameters such as min/max file size, mime types, and file extensions. Once set up, you can simply turn on the ***ignition().*** 
 
 For a more advanced upload option, this class allows you to add callbacks and loop through the files awaiting upload to perform your own validation and checks.
 
-Tested to work with *PHP 5.6 and **PHP 7.***. Try it - It's FREE!
+Tested to work with *PHP 5.6 and **PHP 7.***
 
 # Installation with composer
 You can now install the upload class with composer
 	
 	$ composer require benhall14/phpUpload
 
-Please make sure that you include the composer autoloader and use the corrct namespace.
+Please make sure that you include the composer autoloader and use the correct namespace.
 
 	require 'vendor/autoload.php';
 
@@ -31,7 +31,7 @@ The *submitted()* method will return either **true** or **false** depending on i
 
     $upload->submitted();
 
-## setMessages()
+## ->setMessages()
 
 You can override the default messages by passing an array of custom messages to the *setMessages()* method.
 
@@ -64,13 +64,13 @@ The default messages are:
         'destination_missing' => 'The destination path configuration setting is missing.', 
     ];
 
-## getAllowedExtensions()
+## ->getAllowedExtensions()
 
 This will return the current list of allowed file extensions.
 
 	$extensions = $upload->getAllowedExtensions();
 	
-## setAllowedFileExtensions()
+## ->setAllowedFileExtensions()
 This is a basic, although insecure, method of matching the file extension uploaded with a preset list of allowable extensions. Allowed file types can be either an array of file extensions **array('jpg', 'png', 'gif')**, a pipe-separated list **'jpg|png|gif'**, or the **'*'** wild-card string.
 
 	$upload->setAllowedFileExtensions('jpg|png|gif');
@@ -79,7 +79,7 @@ This is a basic, although insecure, method of matching the file extension upload
 	# or
 	$upload->setAllowedFileExtensions(array('jpg', 'png', 'gif'));
 
-## setAllowedMimeTypes()
+## ->setAllowedMimeTypes()
 This is a more secure method of matching the file mime types uploaded with a preset list of allowable mime types. The allowed mime types can be either an array of mime_types **array('image/jpg', 'image/png')** or the **'*'** wild-card string.
 
 	# to allow all types
@@ -88,62 +88,62 @@ This is a more secure method of matching the file mime types uploaded with a pre
 	# to only allow jpg and png images.
 	$upload->setAllowedMimeTypes(array('image/jpg', 'image/png'));
 
-## getAllowedMimeTypes()
+## ->getAllowedMimeTypes()
 
 This will return the current list of allowed mime types.
 	
 	$mime_types = $upload->getAllowedMimeTypes();
 
-## getMaxFileSize()
+## ->getMaxFileSize()
 This will return the current maximum set file size in bytes.
 	
 	$size = $upload->getMaxFileSize();
 	
-## setMaxFileSize($maximum_file_size = false, $type = 'b')
+## ->setMaxFileSize($maximum_file_size = false, $type = 'b')
 
 This will set the **MAXIMUM** size that is permitted for the upload. The first parameter is the integer size and the second parameter is the type - such as b, kb, mb or gb.
 
 	$upload->setMaxFileSize(10, 'mb');
 
-## getMinFileSize()
+## ->getMinFileSize()
 This will return the current minimum set file size in bytes.
 	
 	$size = $upload->getMaxFileSize();
 
-## setMinFileSize($minimum_file_size = false, $type = 'b')
+## ->setMinFileSize($minimum_file_size = false, $type = 'b')
 
 This will set the **MINIMUM** size that is permitted for the upload. The first parameter is the integer size and the second parameter is the type - such as b, kb, mb or gb.
 
 	$upload->setMinFileSize(1, 'mb');
 
-## setDestinationPath($path = false)
+## ->setDestinationPath($path = false)
 Sets the destination path for the uploads. It can either be a absolute path or a relative path to the script.
 
 	$upload->setDestinationPath('uploads/');
 
-## setExtensionAs($extension = null)
-Forces the uploaded file to use the passed $extension. This doesn't change the mime type - just forces the new file extension. Useful if you only want to accept a certain file type - such as jpg, it allows the forcing of of the jpg extension.
+## ->setExtensionAs($extension = null)
+Forces the uploaded file to use the passed $extension. This doesn't change the mime type - just forces the new file extension. Useful if you only want to accept a certain file type - such as jpg, it allows the forcing of the jpg extension.
 
 	$upload->setExtensionAs('jpg');
 
-## setName($name = false, $clean = true)
+## ->setName($name = false, $clean = true)
 Sets the overriding file name - using the cleanFilename method. **This can only be used with single element files**
 
 	$upload->setName('my-image');
 
-## generateName($bool)
+## ->generateName($bool)
 Sets the configuration option to create random filenames on the fly.
 
 	$upload->generateNames(true);
 
-## ignition()
+## ->ignition()
 This is the main ignition switch. This must be called **after** all of the configuration options have been set.
 
 This will populate the file counts  & internal file objects. *This starts the upload engine.*
 
 	$upload->ignition();
 
-## hasErrors()
+## ->hasErrors()
 This will return **true** or **false** depending on if an error has occurred. It can be combined with *errors()* to show a list of errors. 
 
 	if($upload->hasErrors()){
@@ -152,7 +152,7 @@ This will return **true** or **false** depending on if an error has occurred. It
 		}
 	}
 
-## errors()
+## ->errors()
 This returns an array of errors that occurred during the upload process. It can be combined with *hasError()*.
 
 	if($upload->hasErrors()){
@@ -161,36 +161,36 @@ This returns an array of errors that occurred during the upload process. It can 
 		}
 	}
 
-## isMultiple()
+## ->isMultiple()
 This will return **true** or **false** is the there are multiple files being uploaded.
 
 	$is_multiple = $upload->isMultiple();
 	
-## fileCount()
+## ->fileCount()
 This will return the number of file uploads submitted.
 
 	$count = $upload->fileCount();
 	
-## debug()
+## ->debug()
 This will print a debug message for development and testing.
 
 	$upload->debug();
 
-## successes()
+## ->successes()
 This will return an array of successfully uploaded files.
 
 	foreach($upload->successes() as $files){
 		echo $file->name . ' has been uploaded';
 	}
 
-## files()
+## ->files()
 This will return an array of file objects. If called after the upload()  will also return the status of the upload.
 
 	foreach($upload->files() as $files){
 		echo $file->name;
 	}
 	
-## upload()
+## ->upload()
 This automatically performs the validation and processing on the uploaded files without additional coding.
 
 	$upload->upload();
@@ -198,7 +198,7 @@ This automatically performs the validation and processing on the uploaded files 
 # Callback Options
 The reason for this class is to provide the easiest way to handle uploads and validation without having to manually perform all of the checks. The following callback methods can be used for advanced upload integration. If you are looking for a simple integration - see **upload()** above.
 
-## each($callback)
+## ->each($callback)
 The **each()** accepts a callback and it loops through each file waiting to be uploaded.
 
 	$upload->each(function($file){
@@ -206,28 +206,28 @@ The **each()** accepts a callback and it loops through each file waiting to be u
 		print_r($file);
 	});
 
-## success($callback)
+## ->success($callback)
 Applies the callback to all of the successfully upload files.
 	
 	$upload->success(function($file){
 		echo $file->name . ' has been successfully uploaded.';
 	});
 
-## error($callback)
+## ->error($callback)
 Applies the callback to all of the uploads that have had an error.
 
 	$upload->error(function($file){
 		echo $file->name . ' could not be uploaded due to an error.';	
 	});
 	
-## validate($file)
+## ->validate($file)
 Runs the validation method on the $file supplied. This is for use within an **each()** callback.
 
 	$upload->each(function($file){
 		$isValid = $this->validate($file);
 	});
 
-## process($file)
+## ->process($file)
 Runs the actual upload on the $file supplied. This is for use within an **each()** callback.
 
 	$upload->each(function($file){
@@ -252,12 +252,12 @@ All of the methods that return a **$file** object will have the following proper
 	$file->destination->size; # the destination file size
 	$file->destination->mime_type; # the destination mime type
  	$file->destination->extension; # the destination file extension
-	$file->destination->filename; # the destination file name
+	$file->destination->filename; # the destination file nameof
 	$file->destination->path; # the destination file path
 	$file->success # returns boolean true/false
 	$file->isValid # returns boolean true/false
 
-# Simple Example
+# Example: Simple Upload
 In this example, we show the uploader in its simplest form. We are using the following HTML code:
 
 ```html
@@ -300,7 +300,7 @@ PHP:
 		die($e->getMessage());
 	}
 
-# Advanced Example
+# Example: Advanced Upload
 In this advanced example, we can showcase the callback methods. Again, we use the following HTML code:
 
 ```html
@@ -331,16 +331,16 @@ PHP:
 		    ->ignition();
 	
 		$upload->each(function ($file) use ($upload) {
-		    if ($upload->validate($file)) {
+			if ($upload->validate($file)) {
 			
-			# we can use $file here and perform additional checks or manipulations.
+				# we can use $file here and perform additional checks or manipulations.
 
-			# now we process the upload
-			if ($upload->process($file)) {
-
-			    echo '<li>' . $file->destination->name . ' has been uploaded <b>SUCCESSFULLY</b>.</li>';
-			    return;
-			}
+				# now we process the upload
+				if ($upload->process($file)) {
+				    echo '<li>' . $file->destination->name . ' has been uploaded <b>SUCCESSFULLY</b>.</li>';
+				    
+				    return;
+				}
 		    }
 		    
 		    echo '<li><b>ERROR:</b> ' . $file->source->name . ' could not be uploaded.</li>';
@@ -357,7 +357,8 @@ PHP:
 **Tested to work with PHP 5.6 and PHP 7**
 
 # License
-Copyright (c) Benjamin Hall, benhall14@hotmail.com
+Copyright (c) Benjamin Hall, ben@conobe.co.uk
+https://conobe.co.uk
 
 Licensed under the MIT license
 
