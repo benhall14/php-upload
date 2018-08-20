@@ -289,8 +289,11 @@ PHP:
 				->upload();
 
 			if ($upload->hasErrors()) {
-				foreach($upload->errors() as $error){
-					echo '<li>' . $error . '</li>';
+				# loop through each file that has error'd
+				foreach ($upload->errors() as $file) {
+					foreach ($file->errors as $error) {
+						echo '<li>' . $error . '</li>';
+					}
 				}
 			} else {
 				echo 'Upload(s) Complete!';
@@ -324,32 +327,32 @@ PHP:
 	    $upload = new Upload('image_upload');
 
 	    if ($upload->submitted()) {
-		$upload
-		    ->setDestinationPath('uploads/')
-		    ->setAllowedMimeTypes(array('image/jpg', 'image/jpeg', 'image/png', 'text/plain'))
-		    ->setMaxFileSize(2, 'mb')
-		    ->ignition();
+			$upload
+			    ->setDestinationPath('uploads/')
+			    ->setAllowedMimeTypes(array('image/jpg', 'image/jpeg', 'image/png', 'text/plain'))
+			    ->setMaxFileSize(2, 'mb')
+			    ->ignition();
 	
-		$upload->each(function ($file) use ($upload) {
-			if ($upload->validate($file)) {
-			
-				# we can use $file here and perform additional checks or manipulations.
+			$upload->each(function ($file) use ($upload) {
+				if ($upload->validate($file)) {
 
-				# now we process the upload
-				if ($upload->process($file)) {
-				    echo '<li>' . $file->destination->name . ' has been uploaded <b>SUCCESSFULLY</b>.</li>';
-				    
-				    return;
+					# we can use $file here and perform additional checks or manipulations.
+
+					# now we process the upload
+					if ($upload->process($file)) {
+					    echo '<li>' . $file->destination->name . ' has been uploaded <b>SUCCESSFULLY</b>.</li>';
+					    
+					    return;
+					}
 				}
-		    }
-		    
-		    echo '<li><b>ERROR:</b> ' . $file->source->name . ' could not be uploaded.</li>';
-		    
-		    return;
-		});
-	    }
+
+				echo '<li><b>ERROR:</b> ' . $file->source->name . ' could not be uploaded.</li>';
+
+				return;
+			});
+		}
 	} catch (Exception $e) {
-	    die($e->getMessage());
+		die($e->getMessage());
 	}
 
 

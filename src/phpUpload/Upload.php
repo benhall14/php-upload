@@ -6,7 +6,7 @@ namespace benhall14\phpUpload;
  * An Upload class that makes handing uploads and validation easier.
  *
  * @copyright  Copyright (c) Benjamin Hall
- * @author Benjamin Hall <benhall14@hotmail.com>
+ * @author Benjamin Hall <ben@conobe.co.uk> https://conobe.co.uk
  * @license https://github.com/benhall14/php-upload
  * @version 1.0
  */
