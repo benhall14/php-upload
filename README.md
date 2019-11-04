@@ -6,7 +6,7 @@ For a more advanced upload option, this class allows you to add callbacks and lo
 Tested to work with *PHP 5.6 and **PHP 7.***
 
 # Installation with composer
-You can now install the upload class with composer
+You can now install the upload class with composer:
 	
 	$ composer require benhall14/phpUpload
 
@@ -80,7 +80,7 @@ This is a basic, although insecure, method of matching the file extension upload
 	$upload->setAllowedFileExtensions(array('jpg', 'png', 'gif'));
 
 ## ->setAllowedMimeTypes()
-This is a more secure method of matching the file mime types uploaded with a preset list of allowable mime types. The allowed mime types can be either an array of mime_types **array('image/jpg', 'image/png')** or the **'*'** wild-card string.
+This is a more secure method of matching the file mime types uploaded with a preset list of allowable mime types. The allowed mime types can be either an array of mime types **array('image/jpg', 'image/png')** or the **'*'** wild-card string.
 
 	# to allow all types
 	$upload->setAllowedMimeTypes('*');
@@ -246,9 +246,9 @@ All of the methods that return a **$file** object will have the following proper
 	$file->source->extension; # the source file extension
 	$file->source->name; # the source file name
 	$file->source->size; # the source size
-	$files->source->type; # the source type from $_FILES
- 	$files->source->mime_type; # the source mime type
-	$files->source->error; # the $_FILES error.
+	$file->source->type; # the source type from $_FILES
+ 	$file->source->mime_type; # the source mime type
+	$file->source->error; # the $_FILES error.
 	$file->destination->size; # the destination file size
 	$file->destination->mime_type; # the destination mime type
  	$file->destination->extension; # the destination file extension
